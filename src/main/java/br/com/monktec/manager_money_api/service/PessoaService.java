@@ -22,8 +22,10 @@ public class PessoaService {
 		return pessoaRepository.save(pessoa);
 	}
 	
-	public Pessoa buscarPeloCodigo(long codigo) {
+	public Pessoa buscarPeloCodigo(Long codigo) {
 		return pessoaRepository.findOne(codigo);
 	}
+
+	public void deletaPessoa(Long codigo){ pessoaRepository.delete(codigo);}
 
 }

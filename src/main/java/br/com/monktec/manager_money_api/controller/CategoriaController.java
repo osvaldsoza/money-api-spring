@@ -11,12 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.monktec.manager_money_api.model.Categoria;
 import br.com.monktec.manager_money_api.service.CategoriaService;
@@ -49,4 +44,10 @@ public class CategoriaController {
 		Categoria categoriaEncontrada = categoriaService.buscarPeloCodigo(codigo);
 		return categoriaEncontrada != null ? ResponseEntity.ok(categoriaEncontrada) : ResponseEntity.notFound().build();
 	}
+
+	@DeleteMapping("/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteCategoria(@PathVariable Long codigo){
+	    categoriaService.deletarCategoria(codigo);
+    }
 }
