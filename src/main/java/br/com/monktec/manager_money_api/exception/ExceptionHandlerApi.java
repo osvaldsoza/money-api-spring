@@ -32,7 +32,7 @@ public class ExceptionHandlerApi extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
 
         String mensagemUsuario = messageSource.getMessage("parametro-invalido", null, LocaleContextHolder.getLocale());
-        String mensagemDesenvolvedor = ex.getCause().toString();
+        String mensagemDesenvolvedor = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
 
         List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 
@@ -44,7 +44,6 @@ public class ExceptionHandlerApi extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers,
                                                                   HttpStatus status,
                                                                   WebRequest request) {
-
         List<Erro> erros = listaDeErros(ex.getBindingResult());
 
         return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
