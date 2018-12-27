@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Table(name = "pessoa")
@@ -48,5 +49,18 @@ public class Pessoa {
 	}
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Pessoa)) return false;
+		Pessoa pessoa = (Pessoa) o;
+		return Objects.equals(codigo, pessoa.codigo);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(codigo);
 	}
 }
