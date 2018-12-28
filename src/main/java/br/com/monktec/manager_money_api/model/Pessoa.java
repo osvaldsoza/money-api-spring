@@ -1,11 +1,8 @@
 package br.com.monktec.manager_money_api.model;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
@@ -50,6 +47,12 @@ public class Pessoa {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+
+	@JsonIgnore
+    @Transient
+	public Boolean isInativa(){
+	    return !ativo;
+    }
 
 	@Override
 	public boolean equals(Object o) {
