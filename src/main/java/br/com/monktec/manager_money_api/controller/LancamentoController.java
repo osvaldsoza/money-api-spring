@@ -2,15 +2,19 @@ package br.com.monktec.manager_money_api.controller;
 
 import br.com.monktec.manager_money_api.event.MoneyApiEvent;
 import br.com.monktec.manager_money_api.model.Lancamento;
+import br.com.monktec.manager_money_api.repository.filter.LancamentoFilter;
 import br.com.monktec.manager_money_api.service.LancamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -24,8 +28,8 @@ public class LancamentoController {
     private ApplicationEventPublisher publisher;
 
     @GetMapping
-    public List<Lancamento> getLancamentos() {
-        return lancamentoService.listarLancamentos();
+    public Page<Lancamento> getLancamentos(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        return lancamentoService.listarLancamentosPorFiltros(lancamentoFilter , pageable);
     }
 
     @GetMapping("/{codigo}")
@@ -35,6 +39,11 @@ public class LancamentoController {
         return lancamentoSalvo != null ? ResponseEntity.ok(lancamentoSalvo) : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/{dataVencimento}")
+    public List<Lancamento> getLancamentosPorDataVencimento(@PathVariable Date dataVencimento){
+        return lancamentoService.listarLancamentoPorDataVencimento(dataVencimento);
+    }
+
     @PostMapping
     public ResponseEntity<Lancamento> postLancamento(@Valid @RequestBody Lancamento lancamento, HttpServletResponse response) {
         Lancamento lancamentoSalvo = lancamentoService.salvarLancamento(lancamento);
@@ -42,5 +51,11 @@ public class LancamentoController {
         publisher.publishEvent(new MoneyApiEvent(this, response, lancamentoSalvo.getCodigo()));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoSalvo);
+    }
+
+    @DeleteMapping("/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteLancamento(@PathVariable Long codigo){
+        lancamentoService.deletarLancamneto(codigo);
     }
 }

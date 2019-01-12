@@ -28,13 +28,15 @@ public class ExceptionHandlerApi extends ResponseEntityExceptionHandler {
 
     @Autowired
     private MessageSource messageSource;
+    private String mensagemUsuario;
+    private String mensagemDesenvolvedor;
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-        String mensagemUsuario = messageSource.getMessage("operacao-nao-permitida", null, LocaleContextHolder.getLocale());
-        String mensagemDesenvolvedor = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
+        mensagemUsuario = messageSource.getMessage("operacao-nao-permitida", null, LocaleContextHolder.getLocale());
+        mensagemDesenvolvedor = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
 
         List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 
@@ -55,8 +57,8 @@ public class ExceptionHandlerApi extends ResponseEntityExceptionHandler {
     private ResponseEntity<Object> hanblerEmptyResultDataAccessException(EmptyResultDataAccessException ex,
                                                                          WebRequest request) {
 
-        String mensagemUsuario = messageSource.getMessage("recurso-nao-existe", null, LocaleContextHolder.getLocale());
-        String mensagemDesenvolvedor = ex.toString();
+        mensagemUsuario = messageSource.getMessage("recurso-nao-existe", null, LocaleContextHolder.getLocale());
+        mensagemDesenvolvedor = ex.toString();
 
         List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 
@@ -65,8 +67,8 @@ public class ExceptionHandlerApi extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     private ResponseEntity<Object> handlerDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
-        String mensagemUsuario = messageSource.getMessage("operacao-nao-permitida", null, LocaleContextHolder.getLocale());
-        String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);
+        mensagemUsuario = messageSource.getMessage("operacao-nao-permitida", null, LocaleContextHolder.getLocale());
+        mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);
 
         List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 
@@ -74,9 +76,9 @@ public class ExceptionHandlerApi extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(PessoaInexistenteOuInativaException.class)
-    private ResponseEntity<Object> handlerPessoaInexistenteOuInativaException(PessoaInexistenteOuInativaException ex){
-        String mensagemUsuario = messageSource.getMessage("pessoa-inativa-ou-inexistente", null, LocaleContextHolder.getLocale());
-        String mensagemDesenvolvedor = ex.toString();
+    private ResponseEntity<Object> handlerPessoaInexistenteOuInativaException(PessoaInexistenteOuInativaException ex) {
+        mensagemUsuario = messageSource.getMessage("pessoa-inativa-ou-inexistente", null, LocaleContextHolder.getLocale());
+        mensagemDesenvolvedor = ex.toString();
 
         List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, null);
@@ -86,8 +88,8 @@ public class ExceptionHandlerApi extends ResponseEntityExceptionHandler {
         List<Erro> erros = new ArrayList<>();
 
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            String mensagemUsuario = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
-            String mensagemDesenvolvedor = fieldError.toString();
+            mensagemUsuario = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
+            mensagemDesenvolvedor = fieldError.toString();
             erros.add(new Erro(mensagemUsuario, mensagemDesenvolvedor));
         }
         return erros;

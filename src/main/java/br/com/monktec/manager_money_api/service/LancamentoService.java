@@ -4,10 +4,14 @@ import br.com.monktec.manager_money_api.model.Lancamento;
 import br.com.monktec.manager_money_api.model.Pessoa;
 import br.com.monktec.manager_money_api.repository.LancamentoRepository;
 import br.com.monktec.manager_money_api.repository.PessoaRepository;
+import br.com.monktec.manager_money_api.repository.filter.LancamentoFilter;
 import br.com.monktec.manager_money_api.service.exception.PessoaInexistenteOuInativaException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,8 +23,8 @@ public class LancamentoService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    public List<Lancamento> listarLancamentos(){
-        return lancamentoRepository.findAll();
+    public Page<Lancamento> listarLancamentosPorFiltros(LancamentoFilter lancamentoFilter, Pageable pageable){
+        return lancamentoRepository.filtrar(lancamentoFilter,pageable);
     }
 
     public Lancamento buscarLancamentoPeloCodigo(Long codigo){
@@ -35,5 +39,13 @@ public class LancamentoService {
             throw new PessoaInexistenteOuInativaException();
         }
         return lancamentoRepository.save(lancamento);
+    }
+
+    public List<Lancamento> listarLancamentoPorDataVencimento(Date dataVencimento){
+        return lancamentoRepository.findByDataVencimento(dataVencimento);
+    }
+
+    public void deletarLancamneto(Long codigo){
+        lancamentoRepository.delete(codigo);
     }
 }

@@ -39,8 +39,8 @@ public class Lancamento {
         this.descricao = descricao;
     }
 
-    @Column(name = "data_vencimento")
     @NotNull
+    @Column(name = "data_vencimento")
     public Date getDataVencimento() {
         return dataVencimento;
     }
@@ -75,8 +75,8 @@ public class Lancamento {
         this.observacao = observacao;
     }
 
-    @Enumerated(EnumType.STRING)
     @NotNull
+    @Enumerated(EnumType.STRING)
     public TipoLancamento getTipo() {
         return tipo;
     }
@@ -85,9 +85,9 @@ public class Lancamento {
         this.tipo = tipo;
     }
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "codigo_categoria")
-    @NotNull
     public Categoria getCategoria() {
         return categoria;
     }
@@ -96,9 +96,9 @@ public class Lancamento {
         this.categoria = categoria;
     }
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "codigo_pessoa")
-    @NotNull
     public Pessoa getPessoa() {
         return pessoa;
     }
