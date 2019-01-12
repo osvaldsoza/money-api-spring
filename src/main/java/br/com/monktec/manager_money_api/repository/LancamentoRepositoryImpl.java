@@ -20,18 +20,18 @@ import java.util.List;
 public class LancamentoRepositoryImpl implements LancamnetoRepositoryQuery {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager manager;
 
     @Override
     public Page<Lancamento> filtrar(LancamentoFilter lancamentoFilter, Pageable pageable) {
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Lancamento> criteria = builder.createQuery(Lancamento.class);
         Root<Lancamento> root = criteria.from(Lancamento.class);
 
         Predicate[] predicates = criarRestricoes(lancamentoFilter, builder, root);
         criteria.where(predicates);
 
-        TypedQuery<Lancamento> query = entityManager.createQuery(criteria);
+        TypedQuery<Lancamento> query = manager.createQuery(criteria);
         adicionarRestricaoDePaginacao(query, pageable);
 
         return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
@@ -60,7 +60,7 @@ public class LancamentoRepositoryImpl implements LancamnetoRepositoryQuery {
     }
 
     private Long total(LancamentoFilter lancamentoFilter) {
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         Root<Lancamento> root = criteria.from(Lancamento.class);
 
@@ -68,7 +68,7 @@ public class LancamentoRepositoryImpl implements LancamnetoRepositoryQuery {
         criteria.where(predicates);
 
         criteria.select(builder.count(root));
-        return entityManager.createQuery(criteria).getSingleResult();
+        return manager.createQuery(criteria).getSingleResult();
     }
 
     private void adicionarRestricaoDePaginacao(TypedQuery<Lancamento> query, Pageable pageable) {
