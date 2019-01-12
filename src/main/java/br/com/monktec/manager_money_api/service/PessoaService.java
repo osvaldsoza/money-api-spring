@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import br.com.monktec.manager_money_api.model.Pessoa;
+import br.com.monktec.manager_money_api.model.pessoa.Pessoa;
 import br.com.monktec.manager_money_api.repository.PessoaRepository;
 
 @Service

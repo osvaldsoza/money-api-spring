@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.monktec.manager_money_api.model.Categoria;
+import br.com.monktec.manager_money_api.model.categoria.Categoria;
 import br.com.monktec.manager_money_api.repository.CategoriaRepository;
 
 @Service

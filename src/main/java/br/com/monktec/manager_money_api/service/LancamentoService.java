@@ -1,10 +1,10 @@
 package br.com.monktec.manager_money_api.service;
 
-import br.com.monktec.manager_money_api.model.Lancamento;
-import br.com.monktec.manager_money_api.model.Pessoa;
+import br.com.monktec.manager_money_api.model.lancamento.Lancamento;
+import br.com.monktec.manager_money_api.model.pessoa.Pessoa;
 import br.com.monktec.manager_money_api.repository.LancamentoRepository;
 import br.com.monktec.manager_money_api.repository.PessoaRepository;
-import br.com.monktec.manager_money_api.repository.filter.LancamentoFilter;
+import br.com.monktec.manager_money_api.model.lancamento.LancamentoFilter;
 import br.com.monktec.manager_money_api.service.exception.PessoaInexistenteOuInativaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -1,6 +1,6 @@
 package br.com.monktec.manager_money_api.repository;
 
-import br.com.monktec.manager_money_api.model.Lancamento;
+import br.com.monktec.manager_money_api.model.lancamento.Lancamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;

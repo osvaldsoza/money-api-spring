@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.monktec.manager_money_api.event.MoneyApiEvent;
-import br.com.monktec.manager_money_api.model.Pessoa;
+import br.com.monktec.manager_money_api.model.pessoa.Pessoa;
 import br.com.monktec.manager_money_api.service.PessoaService;
 
 @RestController

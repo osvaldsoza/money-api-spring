@@ -1,4 +1,7 @@
-package br.com.monktec.manager_money_api.model;
+package br.com.monktec.manager_money_api.model.lancamento;
+
+import br.com.monktec.manager_money_api.model.categoria.Categoria;
+import br.com.monktec.manager_money_api.model.pessoa.Pessoa;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

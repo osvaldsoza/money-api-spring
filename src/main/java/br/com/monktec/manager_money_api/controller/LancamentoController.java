@@ -1,8 +1,8 @@
 package br.com.monktec.manager_money_api.controller;
 
 import br.com.monktec.manager_money_api.event.MoneyApiEvent;
-import br.com.monktec.manager_money_api.model.Lancamento;
-import br.com.monktec.manager_money_api.repository.filter.LancamentoFilter;
+import br.com.monktec.manager_money_api.model.lancamento.Lancamento;
+import br.com.monktec.manager_money_api.model.lancamento.LancamentoFilter;
 import br.com.monktec.manager_money_api.service.LancamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -35,11 +35,10 @@ public class LancamentoController {
     @GetMapping("/{codigo}")
     public ResponseEntity<Lancamento> getLancamentoPeloCodigo(@PathVariable Long codigo) {
         Lancamento lancamentoSalvo = lancamentoService.buscarLancamentoPeloCodigo(codigo);
-
         return lancamentoSalvo != null ? ResponseEntity.ok(lancamentoSalvo) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/{dataVencimento}")
+    @GetMapping("/dataVencimento/{dataVencimento}")
     public List<Lancamento> getLancamentosPorDataVencimento(@PathVariable Date dataVencimento){
         return lancamentoService.listarLancamentoPorDataVencimento(dataVencimento);
     }

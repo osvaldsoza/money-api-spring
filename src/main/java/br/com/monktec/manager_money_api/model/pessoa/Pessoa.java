@@ -1,5 +1,6 @@
-package br.com.monktec.manager_money_api.model;
+package br.com.monktec.manager_money_api.model.pessoa;
 
+import br.com.monktec.manager_money_api.model.endereco.Endereco;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

@@ -1,6 +1,5 @@
 package br.com.monktec.manager_money_api.controller;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.monktec.manager_money_api.model.Categoria;
+import br.com.monktec.manager_money_api.model.categoria.Categoria;
 import br.com.monktec.manager_money_api.service.CategoriaService;
 
 @RestController

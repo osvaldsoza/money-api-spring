@@ -1,4 +1,4 @@
-package br.com.monktec.manager_money_api.repository.filter;
+package br.com.monktec.manager_money_api.model.lancamento;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

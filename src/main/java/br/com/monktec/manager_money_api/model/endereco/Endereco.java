@@ -1,4 +1,4 @@
-package br.com.monktec.manager_money_api.model;
+package br.com.monktec.manager_money_api.model.endereco;
 
 import javax.persistence.Embeddable;
 
