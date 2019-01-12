@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
 
 @RestController
 @RequestMapping("/lancamentos")
@@ -36,11 +34,6 @@ public class LancamentoController {
     public ResponseEntity<Lancamento> getLancamentoPeloCodigo(@PathVariable Long codigo) {
         Lancamento lancamentoSalvo = lancamentoService.buscarLancamentoPeloCodigo(codigo);
         return lancamentoSalvo != null ? ResponseEntity.ok(lancamentoSalvo) : ResponseEntity.notFound().build();
-    }
-
-    @GetMapping("/dataVencimento/{dataVencimento}")
-    public List<Lancamento> getLancamentosPorDataVencimento(@PathVariable Date dataVencimento){
-        return lancamentoService.listarLancamentoPorDataVencimento(dataVencimento);
     }
 
     @PostMapping

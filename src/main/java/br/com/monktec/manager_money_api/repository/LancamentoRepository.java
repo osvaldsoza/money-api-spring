@@ -6,8 +6,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Date;
 import java.util.List;
 
-public interface LancamentoRepository extends JpaRepository<Lancamento, Long>, LancamnetoRepositoryQuery {
-
-    public List<Lancamento> findByDataVencimento(Date dataNascimento);
-
-}
+public interface LancamentoRepository extends JpaRepository<Lancamento, Long>, LancamnetoRepositoryQuery {}

@@ -41,10 +41,6 @@ public class LancamentoService {
         return lancamentoRepository.save(lancamento);
     }
 
-    public List<Lancamento> listarLancamentoPorDataVencimento(Date dataVencimento){
-        return lancamentoRepository.findByDataVencimento(dataVencimento);
-    }
-
     public void deletarLancamneto(Long codigo){
         lancamentoRepository.delete(codigo);
     }
